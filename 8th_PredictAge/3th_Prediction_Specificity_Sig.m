@@ -28,8 +28,8 @@ Motion_Fold1 = Behavior.MotionMeanRelRMS(Index_Fold1);
 TBV_Fold1 = Behavior.TBV(Index_Fold1);
 TotalStength_Fold1 = Behavior.Strength_EigNorm_SubIden(Index_Fold1);
 
-[ParCorr_Actual_Fold0, ~] = partialcorr(Prediction_Fold0.Predict_Score', Age_Fold0, double([Sex_Fold0 Handedness_Fold0 Motion_Fold0 TBV_Fold0 TotalStength_Fold0]));
-[ParCorr_Actual_Fold1, ~] = partialcorr(Prediction_Fold1.Predict_Score', Age_Fold1, double([Sex_Fold1 Handedness_Fold1 Motion_Fold1 TBV_Fold1 TotalStength_Fold1]));
+[ParCorr_Actual_Fold0, ~] = partialcorr(Prediction_Fold0.Predict_Score', Age_Fold0, [double(Sex_Fold0) double(Handedness_Fold0) double(Motion_Fold0) double(TBV_Fold0) double(TotalStength_Fold0)]);
+[ParCorr_Actual_Fold1, ~] = partialcorr(Prediction_Fold1.Predict_Score', Age_Fold1, [double(Sex_Fold1) double(Handedness_Fold1) double(Motion_Fold1) double(TBV_Fold1) double(TotalStength_Fold1)]);
 
 %% Significance
 AgePrediction_PermutationFolder = [ReplicationFolder '/results/Age_Prediction/2Fold_Sort_Permutation'];
@@ -37,7 +37,7 @@ AgePrediction_PermutationFolder = [ReplicationFolder '/results/Age_Prediction/2F
 Permutation_Fold0_Cell = g_ls([AgePrediction_PermutationFolder '/Time_*/Fold_0_Score.mat']);
 for i = 1:1000
   tmp = load(Permutation_Fold0_Cell{i});
-  ParCorr_Rand_Fold0(i) = partialcorr(tmp.Predict_Score', Age_Fold0, double([Sex_Fold0 Handedness_Fold0 Motion_Fold0 TBV_Fold0 TotalStength_Fold0]));
+  ParCorr_Rand_Fold0(i) = partialcorr(tmp.Predict_Score', Age_Fold0, [double(Sex_Fold0) double(Handedness_Fold0) double(Motion_Fold0) double(TBV_Fold0) double(TotalStength_Fold0)]);
   MAE_Rand_Fold0(i) = tmp.MAE;
 end
 ParCorr_Fold0_Sig = length(find(ParCorr_Rand_Fold0 >= ParCorr_Actual_Fold0)) / 1000;
@@ -47,9 +47,10 @@ save([ReplicationFolder '/results/Age_Prediction/2Fold_Sort_Fold0_Specificity_Si
 Permutation_Fold1_Cell = g_ls([AgePrediction_PermutationFolder '/Time_*/Fold_1_Score.mat']);
 for i = 1:1000
   tmp = load(Permutation_Fold1_Cell{i});
-  ParCorr_Rand_Fold1(i) = partialcorr(tmp.Predict_Score', Age_Fold1, double([Sex_Fold1 Handedness_Fold1 Motion_Fold1 TBV_Fold1 TotalStength_Fold1]));
+  ParCorr_Rand_Fold1(i) = partialcorr(tmp.Predict_Score', Age_Fold1, [double(Sex_Fold1) double(Handedness_Fold1) double(Motion_Fold1) double(TBV_Fold1) double(TotalStength_Fold1)]);
   MAE_Rand_Fold1(i) = tmp.MAE;
 end
 ParCorr_Fold1_Sig = length(find(ParCorr_Rand_Fold1 >= ParCorr_Actual_Fold1)) / 1000;
 MAE_Fold1_Sig = length(find(MAE_Rand_Fold1 <= MAE_Actual_Fold1)) / 1000;
 save([ReplicationFolder '/results/Age_Prediction/2Fold_Sort_Fold1_Specificity_Sig.mat'], 'ParCorr_Actual_Fold1', 'ParCorr_Rand_Fold1', 'ParCorr_Fold1_Sig', 'MAE_Actual_Fold1', 'MAE_Rand_Fold1', 'MAE_Fold1_Sig');
+

@@ -28,8 +28,8 @@ for i = 0:99
     TBV_Fold1 = Behavior.TBV(Index_Fold1);
     TotalStength_Fold1 = Behavior.Strength_EigNorm_SubIden(Index_Fold1);
 
-    [ParCorr_Actual_Fold0, ~] = partialcorr(Prediction_Fold0.Predict_Score', Age_Fold0, double([Sex_Fold0 Handedness_Fold0 Motion_Fold0 TBV_Fold0 TotalStength_Fold0]));
-    [ParCorr_Actual_Fold1, ~] = partialcorr(Prediction_Fold1.Predict_Score', Age_Fold1, double([Sex_Fold1 Handedness_Fold1 Motion_Fold1 TBV_Fold1 TotalStength_Fold1]));
+    [ParCorr_Actual_Fold0, ~] = partialcorr(Prediction_Fold0.Predict_Score', Age_Fold0, [double(Sex_Fold0) double(Handedness_Fold0) double(Motion_Fold0) double(TBV_Fold0) double(TotalStength_Fold0)]);
+    [ParCorr_Actual_Fold1, ~] = partialcorr(Prediction_Fold1.Predict_Score', Age_Fold1, [double(Sex_Fold1) double(Handedness_Fold1) double(Motion_Fold1) double(TBV_Fold1) double(TotalStength_Fold1)]);
     
     ParCorr_Actual(i + 1) = mean([ParCorr_Actual_Fold0, ParCorr_Actual_Fold1]);
     MAE_Actual(i + 1) = mean([MAE_Actual_Fold0, MAE_Actual_Fold1]);
