@@ -7,10 +7,10 @@ Energy_Actual_Mat <- readMat(paste0(Folder, '/InitialAll0_TargetFP.mat'));
 Energy_Actual <- Energy_Actual_Mat$Energy;
 Energy_Actual_WholeBrainAvg <- rowMeans(Energy_Actual);
 
-RepeatQuantity <- 3;
+RepeatQuantity <- 100;
 Energy_NullNetworks = matrix(0, 946, 232);
 Energy_NullNetworks_WholeBrainAvg = matrix(0, 946, 1);
-for (i in 1:3)
+for (i in 1:100)
 {
   tmp <- readMat(paste0(Folder, '/NullNetworks/InitialAll0_TargetFP_NullNetwork_', as.character(i), '.mat'));
   Energy_NullNetworks = Energy_NullNetworks + tmp$Energy;
