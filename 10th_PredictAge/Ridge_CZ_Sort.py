@@ -249,18 +249,20 @@ def Ridge_Weight(Subjects_Data, Subjects_Score, CV_Flag, CV_FoldQuantity_or_Alph
     
     Features_Quantity = np.shape(Subjects_Data)[1];
     Scale = preprocessing.MinMaxScaler()
-    Subjects_Data = Scale.fit_transform(Subjects_Data)
+    Subjects_Data_Scaling = Scale.fit_transform(Subjects_Data)
    
     if CV_Flag:
         # Select optimal alpha using inner fold cross validation
-        Optimal_Alpha, Inner_Corr, Inner_MAE_inv = Ridge_OptimalAlpha_KFold(Subjects_Data, Subjects_Score, CV_FoldQuantity_or_Alpha, Alpha_Range, ResultantFolder, Parallel_Quantity)
+        Optimal_Alpha, Inner_Corr, Inner_MAE_inv = Ridge_OptimalAlpha_KFold(Subjects_Data_Scaling, Subjects_Score, CV_FoldQuantity_or_Alpha, Alpha_Range, ResultantFolder, Parallel_Quantity)
     else:
         Optimal_Alpha = CV_FoldQuantity_or_Alpha
 
     clf = linear_model.Ridge(alpha=Optimal_Alpha)
-    clf.fit(Subjects_Data, Subjects_Score)
+    clf.fit(Subjects_Data_Scaling, Subjects_Score)
     Weight = clf.coef_ / np.sqrt(np.sum(clf.coef_ **2))
-    Weight_result = {'w_Brain':Weight, 'alpha':Optimal_Alpha}
+    Weight_Haufe = np.dot(np.cov(np.transpose(Subjects_Data_Scaling)), clf.coef_);
+    Weight_Haufe = Weight_Haufe / np.sqrt(np.sum(Weight_Haufe ** 2));
+    Weight_result = {'w_Brain':Weight, 'w_Brain_Haufe': Weight_Haufe, 'alpha':Optimal_Alpha}
     sio.savemat(ResultantFolder + '/w_Brain.mat', Weight_result)
     return;
 

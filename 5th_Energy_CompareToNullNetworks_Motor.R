@@ -3,7 +3,7 @@ library(R.matlab)
 library(ggplot2)
 
 Folder <- '/data/jux/BBL/projects/pncControlEnergy/results/Replication/data/energyData';
-Energy_Actual_Mat <- readMat(paste0(Folder, '/InitialAll0_TargetFP.mat'));
+Energy_Actual_Mat <- readMat(paste0(Folder, '/InitialAll0_TargetMotor.mat'));
 Energy_Actual <- Energy_Actual_Mat$Energy;
 Energy_Actual_WholeBrainAvg <- rowMeans(Energy_Actual);
 
@@ -12,7 +12,7 @@ Energy_NullNetworks = matrix(0, 946, 232);
 Energy_NullNetworks_WholeBrainAvg = matrix(0, 946, 1);
 for (i in 1:100)
 {
-  tmp <- readMat(paste0(Folder, '/NullNetworks/InitialAll0_TargetFP_NullNetwork_', as.character(i), '.mat'));
+  tmp <- readMat(paste0(Folder, '/NullNetworks/InitialAll0_TargetMotor_NullNetwork_', as.character(i), '.mat'));
   Energy_NullNetworks = Energy_NullNetworks + tmp$Energy;
   Energy_NullNetworks_WholeBrainAvg = Energy_NullNetworks_WholeBrainAvg + rowMeans(tmp$Energy);
 }
@@ -35,7 +35,7 @@ Fig <- ggplot(tmp, aes(x = Label, y = Energy)) + geom_boxplot(fill = c("#636466"
 Fig <- Fig + labs(x = "", y = "Control Energy") + theme_classic()
 Fig <- Fig + theme(axis.text.y = element_text(size= 37, colour="black"), 
                    axis.title=element_text(size = 37));
-Fig <- Fig + scale_y_continuous(limits = c(0.20, 0.25), breaks = c(0.20, 0.22, 0.24), expand = c(0, 0))
+Fig <- Fig + scale_y_continuous(limits = c(0.25, 0.36), breaks = c(0.25, 0.30, 0.35), expand = c(0, 0))
 Fig + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-ggsave(paste0(FigureFolder, '/Energy_TrueNullNetwork.tiff'), width = 17, height = 15, dpi = 50, units = "cm");
+ggsave(paste0(FigureFolder, '/Energy_TrueNullNetwork_Motor.tiff'), width = 17, height = 15, dpi = 100, units = "cm");
 

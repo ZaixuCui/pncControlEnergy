@@ -8,7 +8,7 @@ FigureFolder <- '/data/jux/BBL/projects/pncControlEnergy/results/Replication/Fig
 Yeo_atlas <- readMat(file.path(ReplicationFolder, '/data/Yeo_7system.mat'));
 Yeo_Index <- Yeo_atlas$Yeo.7system[c(1:191, 193:233)];
 
-InitialAll0_TargetActivation <- readMat(file.path(ReplicationFolder, '/data/energyData/InitialAll0_TargetFP.mat'));
+InitialAll0_TargetActivation <- readMat(file.path(ReplicationFolder, '/data/energyData/InitialAll0_TargetActivationMean.mat'));
 Energy <- InitialAll0_TargetActivation$Energy;
 Energy_SubjectsAvg <- log(colMeans(Energy));
 tmp <- data.frame(Energy_data = Energy_SubjectsAvg, Yeo = Yeo_Index);
@@ -17,7 +17,7 @@ Fig <- ggplot(tmp, aes(x = Yeo, y = Energy_data)) + geom_boxplot(fill = c("#AF33
 Fig <- Fig + labs(x = "", y = "log(Control Energy)") + theme_classic()
 Fig <- Fig + theme(axis.text.x = element_text(size= 32, colour="black"), 
                    axis.text.y = element_text(size= 32, colour="black"), 
-                   axis.title=element_text(size = 32));
+                   axis.title = element_text(size = 32));
 Fig + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-ggsave(paste0(FigureFolder, '/Energyln_Boxplot.tiff'), width = 16, height = 15, units = "cm");
+ggsave(paste0(FigureFolder, '/Energyln_Boxplot_TargetActivationMean.tiff'), width = 16, height = 15, units = "cm");
 

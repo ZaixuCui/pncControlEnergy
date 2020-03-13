@@ -32,7 +32,7 @@ Behavior$HandednessV2 <- as.factor(AllInfo$handednessv2);
 Behavior$MotionMeanRelRMS <- as.numeric(AllInfo$dti64MeanRelRMS);
 Behavior$TBV <- as.numeric(AllInfo$mprage_antsCT_vol_TBV);
 # Whole brain strength of the network
-StrengthInfo <- readMat(paste0(ReplicationFolder, '/data/WholeBrainStrength_Prob_946.mat'));
+StrengthInfo <- readMat(paste0(ReplicationFolder, '/data/NetworkStrength_Prob_946.mat'));
 Strength_EigNorm_SubIden <- as.numeric(StrengthInfo$WholeBrainStrength.EigNorm.SubIden);
 
 NonNANIndex <- which(!is.na(AllInfo$F3_Executive_Efficiency));

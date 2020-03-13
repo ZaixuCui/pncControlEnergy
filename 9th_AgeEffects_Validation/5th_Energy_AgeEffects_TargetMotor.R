@@ -46,9 +46,13 @@ if (summary(Energy_lm_WholeBrainAvg)$coefficients[2,3] < 0) {
   Z_Value = qnorm(P_Value / 2, lower.tail=FALSE);
 }
 print(Z_Value);
-Energy_Gam_Age_Mat <- file.path(ResultantFolder, 'Energy_Gam_Age_WholeBrainLevel.mat');
-writeMat(Energy_Gam_Age_Mat, Age_Z = Z_Value, Age_P = P_Value);
   # Calculate the partial correlation to represent effect size
 Energy_WholeBrainAvg_Partial <- lm(Energy_WholeBrainAvg ~ Sex_factor + HandednessV2 + MotionMeanRelRMS + TBV + Strength_EigNorm_SubIden, data = Behavior)$residuals;
 Age_Partial <- lm(AgeYears ~ Sex_factor + HandednessV2 + MotionMeanRelRMS + TBV + Strength_EigNorm_SubIden, data = Behavior)$residuals;
-cor.test(Energy_WholeBrainAvg_Partial, Age_Partial);
+Correlation = cor.test(Energy_WholeBrainAvg_Partial, Age_Partial);
+PartialCorr = Correlation$estimate;
+
+# Write to the file
+Energy_Gam_Age_Mat <- file.path(ResultantFolder, '/Energy_Gam_Age_WholeBrainLevel.mat');
+writeMat(Energy_Gam_Age_Mat, Age_Z = Z_Value, Age_P = P_Value, Age_PCorr = PartialCorr);
+

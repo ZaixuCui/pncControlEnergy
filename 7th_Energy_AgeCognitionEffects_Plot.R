@@ -131,7 +131,7 @@ tmp_variable <- Energy_YeoAvg[, i];
 Energy_Gam <- gam(tmp_variable ~ s(AgeYears, k=4) + Sex_factor + HandednessV2 + MotionMeanRelRMS + TBV + Strength_EigNorm_SubIden, method = "REML", data = Behavior);
 Fig <- visreg(Energy_Gam, "AgeYears", xlab = "", ylab = "", line.par = list(col = '#E443FF'), fill = list(fill = '#F6C9FF'), gg = TRUE)
 Fig <- Fig + theme_classic() + theme(axis.text=element_text(size=32, color='black'));
-Fig <- Fig + scale_y_continuous(limits = c(0.005, 0.030), breaks = c(0.005, 0.015, 0.025), label = c("0.5", "1.5", "2.5"))
+Fig <- Fig + scale_y_continuous(limits = c(0.005, 0.035), breaks = c(0.005, 0.015, 0.025, 0.035), label = c("0.5", "1.5", "2.5", "3.5"))
 Fig + geom_point(color = '#E443FF', size = 1.5)
 ggsave(paste(FigureFolder, '/AgeEffect_Scatter_VentralAttention.tiff', sep = ''), width = 17, height = 15, dpi = 300, units = "cm");
 # There is an outlier, energy in ventral attention for no. 798 subject 
