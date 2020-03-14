@@ -2,7 +2,7 @@
 library(R.matlab)
 
 #########################################################################
-### 1.Averaging activation for these 946 subjects                     ###
+###   Averaging activation for these 946 subjects                     ###
 ###   Only 675 subjects have activation data in all regions           ###
 ###   So, average these 675 subjects                                  ###
 #########################################################################
