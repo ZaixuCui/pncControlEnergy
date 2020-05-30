@@ -1,8 +1,8 @@
 # pncControlEnergy
 
-The codes of our paper entitled "Optimization of energy state transition trajectory supports the development of executive function during youth"
+The codes of our eLife paper entitled "Optimization of energy state transition trajectory supports the development of executive function during youth"
 
-Authors of the paper:
-Zaixu Cui, Jennifer Stiso, Graham L. Baum, Jason Z. Kim, David R. Roalf, Richard F. Betzel, Shi Gu, Zhixin Lu, Cedric H. Xia, Rastko Ciric, Tyler M. Moore, Russell T. Shinohara, Kosha Ruparel, Christos Davatzikos, Fabio Pasqualetti, Raquel E. Gur, Ruben C. Gur, Danielle S. Bassett,† & Theodore D. Satterthwaite†*
+Citing our paper will be greatly appreciated if you use these codes.
+<br>&emsp; ```Zaixu Cui, et al., Optimization of energy state transition trajectory supports the development of executive function during youth. (2020) eLife. 9:e53060. ```
 
 See Wiki (https://github.com/ZaixuCui/pncControlEnergy/wiki) for the detailed explanation of the codes. 
